@@ -1,0 +1,19 @@
+---
+- name: Setup web servers using raw commands
+  hosts: webservers
+  gather_facts: no
+  tasks:
+    - name: Update system
+      raw: sudo yum update -y
+      
+    - name: Install Apache
+      raw: sudo yum install -y httpd
+      
+    - name: Start and enable Apache
+      raw: sudo systemctl start httpd && sudo systemctl enable httpd
+      
+    - name: Create index page
+      raw: echo "<h1>Web Server $(hostname)</h1>" | sudo tee /var/www/html/index.html
+
+    - name: Create healthcheck page
+      raw: echo "<h1>OK</h1>" | sudo tee /var/www/html/healthcheck.html

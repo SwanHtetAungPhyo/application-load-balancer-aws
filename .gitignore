@@ -1,0 +1,3 @@
+infra/.terraform.lock.hcl
+infra/.terraform
+infra/ec2-key.pub
